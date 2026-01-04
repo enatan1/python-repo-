@@ -1,7 +1,5 @@
 import pandas as pd
 import numpy as np
-
-
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA, TruncatedSVD
 
@@ -10,9 +8,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from scipy.stats import spearmanr
+#check
 
-
-
+  
 path = "~/Desktop/DATA.xlsx"
 df = pd.read_excel(path)
 
