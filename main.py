@@ -19,7 +19,7 @@ df = pd.read_excel(path)
 df_1984 = df[df["YearCollected"] == 1984].copy()
 parasite_cols = df_1984.columns.drop(["YearCollected", "Host"])
 
-
+  
 presence = (df_1984[parasite_cols] > 0).astype(int)
 prevalence_1984 = presence.groupby(df_1984["Host"]).mean()
 
