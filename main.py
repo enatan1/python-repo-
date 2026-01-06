@@ -48,7 +48,7 @@ stratify_labels = (pairs_df["y"] > 0).astype(int)
 skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
 all_rhos = []
-all_r2s = []  # List to store R^2 for each fold
+all_r2s = []  # Lisst to store R^2 for each fold
 all_y_test = []
 all_y_pred = []
 fold_importances = []
