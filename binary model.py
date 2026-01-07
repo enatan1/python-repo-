@@ -20,21 +20,10 @@ presence_matrix = (df_1984[parasite_cols] > 0).astype(int)
 prevalence_1984 = presence_matrix.groupby(df_1984["Host"]).mean()
 #show(prevalence_1984)
 A = prevalence_1984.values
-hosts = prevalence_1984.index.to_numpy()
-parasites = prevalence_1984.columns.to_numpy()
 
-# Build full edge list
-pairs = []
-for i, h in enumerate(hosts):
-    for j, p in enumerate(parasites):
-        pairs.append((i, j, h, p, A[i, j]))
+# --- binary transformation of A --
 
-pairs_df = pd.DataFrame(pairs, columns=["i", "j", "host", "parasite", "y"])
-
-# --- BINARY TRANSFORMATION ---
-# Convert continuous prevalence into 0 (Absence) or 1 (Presence)
-pairs_df["y_bin"] = (pairs_df["y"] > 0).astype(int)
-show(pairs_df)
+show(binary_A)
 # -------------------------------
 # 2. Stratified CV Setup
 # -------------------------------
