@@ -247,3 +247,101 @@ cm = confusion_matrix(y_test, y_pred)
 ConfusionMatrixDisplay(cm).plot()
 plt.title("Confusion matrix (threshold = 0.5)")
 plt.show()
+
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Count unique species
+n_hosts = cell_df["host_idx"].nunique()
+n_parasites = cell_df["parasite_idx"].nunique()
+
+print("Number of host species:", n_hosts)
+print("Number of parasite species:", n_parasites)
+
+labels = ["Host species", "Parasite species"]
+counts = [n_hosts, n_parasites]
+
+plt.figure(figsize=(5,4))
+plt.bar(labels, counts)
+plt.ylabel("Number of species")
+plt.title("Number of Host vs Parasite Species")
+
+# add values on bars
+for i, v in enumerate(counts):
+    plt.text(i, v, str(v), ha="center", va="bottom")
+
+plt.tight_layout()
+plt.show()
+
+import matplotlib.pyplot as plt
+
+# all data is already 1984
+df_year = cell_df
+
+host_links = (
+    df_year[df_year["label"] == 1]
+    .groupby("host_idx")
+    .size()
+)
+
+plt.figure(figsize=(6,4))
+plt.hist(host_links, bins=20)
+plt.xlabel("Number of parasite links per host")
+plt.ylabel("Number of host species")
+plt.title("Host–Parasite Link Distribution (Hosts) – 1984")
+plt.tight_layout()
+plt.show()
+
+
+degree_counts = host_links.value_counts().sort_index()
+
+plt.figure(figsize=(6,4))
+plt.bar(degree_counts.index, degree_counts.values)
+plt.xlabel("Degree (number of parasite links)")
+plt.ylabel("Number of host species")
+plt.title("Exact Host Degree Distribution – 1984")
+plt.tight_layout()
+plt.show()
+
+
+import matplotlib.pyplot as plt
+
+# all data is already for 1984
+df_year = cell_df
+
+# degree = number of links per host
+host_links = (
+    df_year[df_year["label"] == 1]
+    .groupby("host_idx")
+    .size()
+)
+
+# exact degree distribution
+host_degree_counts = host_links.value_counts().sort_index()
+
+plt.figure(figsize=(6,4))
+plt.bar(host_degree_counts.index, host_degree_counts.values)
+plt.xlabel("Number of parasite links (degree)")
+plt.ylabel("Number of host species")
+plt.title("Host–Parasite Link Distribution (Hosts) – 1984")
+plt.tight_layout()
+plt.show()
+
+
+import matplotlib.pyplot as plt
+
+# all data is already 1984
+df_year = cell_df
+
+# prevalence values for existing links
+prevalence_values = df_year.loc[df_year["label"] == 1, "value"]
+
+plt.figure(figsize=(6,4))
+plt.hist(prevalence_values, bins=30)
+plt.xlabel("Prevalence")
+plt.ylabel("Number of host–parasite links")
+plt.title("Prevalence Distribution (1984)")
+plt.tight_layout()
+plt.show()

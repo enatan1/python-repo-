@@ -7,6 +7,8 @@ from sklearn.model_selection import StratifiedKFold, StratifiedShuffleSplit
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, confusion_matrix, ConfusionMatrixDisplay
 from pandasgui import show
+from functions import mask_test_cells
+
 # -------------------------------
 # 1. Data Loading & Matrix Prep
 # -------------------------------
@@ -98,5 +100,11 @@ X_test[
     test_cells["host_idx"].to_numpy(),
     test_cells["parasite_idx"].to_numpy()
 ] = test_cells["label"].to_numpy()
+
+
+masked_binary_1984 = mask_test_cells(binary_1984, X_test)
+#show(masked_binary_1984)
+print('total number of NA ',masked_binary_1984.isna().sum().sum())
+
 
 
